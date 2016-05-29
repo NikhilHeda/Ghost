@@ -107,7 +107,7 @@ public class GhostActivity extends Activity implements View.OnClickListener {
             gameStatus.setText(USER_TURN);
         } else {
             gameStatus.setText(COMPUTER_TURN);
-            //computerTurn();
+            computerTurn();
         }
         return true;
     }

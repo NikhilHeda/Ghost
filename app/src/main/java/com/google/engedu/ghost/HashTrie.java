@@ -42,20 +42,28 @@ class HashTrie {
     String getAnyWordStartingWith(String prefix) {
 
         HashMap<Character, HashMap> currentNode = root;
+        boolean flag = true;
+
         for (int i = 0; i < prefix.length(); i++) {
-            if (currentNode.containsKey(prefix.charAt(i)))
+            if (currentNode.containsKey(prefix.charAt(i))) {
                 currentNode = currentNode.get(prefix.charAt(i));
+                flag = true;
+            } else {
+                flag = false;
+            }
         }
 
-        String result = prefix;
+        if (flag) {
+            String result = prefix;
 
-        for (Character c : currentNode.keySet()) {
-            if (c != '\0') {
-                result += Character.toString(c);
-                result += getAnyWordStartingWith(result);
-                currentNode.get(c);
+            for (Character c : currentNode.keySet()) {
+                if (c != '\0') {
+                    result += Character.toString(c);
+                    result += getAnyWordStartingWith(result);
+                    currentNode.get(c);
+                }
+                return result.substring(prefix.length());
             }
-            return result.substring(prefix.length());
         }
 
         return "";
